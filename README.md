@@ -1,5 +1,6 @@
 # Ex.05 Design a Website for Server Side Processing
-## Date:26.04.2025
+## Date:28.04.2025
+## Reg no: 212224230024
 
 ## AIM:
  To design a website to calculate the power of a lamp filament in an incandescent bulb in the server side. 
@@ -33,20 +34,16 @@ Publish the website in the given URL.
 
 ## PROGRAM :
 ```
-math.html
-
-
+ power.html
 <html>
 <head>
 <meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<title>Surface Area of Right Cylinder</title>
-<title>ARUNKUMAR S(212224230024)</title>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv="X-UA-Compatible" content='IE=edge'>
+<title>POWER</title>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
 <style type="text/css">
-body
-{
-background-color:rgb(11, 210, 228);
+<body> {
+background-color: blue;
 }
 .edge {
 width: 1440px;
@@ -56,45 +53,42 @@ padding-top: 250px;
 padding-left: 300px;
 }
 .box {
-display:block;
-border: Thick dashed rgb(8, 6, 17);
+display: block;
+border: thick dashed lime;
 width: 500px;
 min-height: 300px;
 font-size: 20px;
-background-color:rgb(209, 20, 42);
+background-color: blue;
 }
-.formelt{
-color:rgw(1, 18, 17);
+.formelt {
+color: orange;
 text-align: center;
 margin-top: 7px;
 margin-bottom: 6px;
 }
-h1
-{
-color:rgb(17, 232, 239);
+h1 {
+color: rgb(255, 0, 179);
 text-align: center;
 padding-top: 20px;
 }
 </style>
 </head>
-<body>
+</body>
 <div class="edge">
 <div class="box">
- ARUKUMAR S (212224230024)
-<h1>Surface Area of Right Cylinder</h1>
-<form method="POST">
-{% csrf_token %}
+<h1>POWER</h1>
+<form id="powerForm">
 <div class="formelt">
-Radius : <input type="text" name="radius" value="{{r}}"></input>(in m)<br/>
+INTENSITY: <input type="number" id="intensity" name="INTENSITY" required>(in W/m²)<br/>
 </div>
 <div class="formelt">
-Height : <input type="text" name="height" value="{{h}}"></input>(in m)<br/>
+RESISTANCE: <input type="number" id="resistance" name="RESISTANCE" required>(in ohms)<br/>
 </div>
 <div class="formelt">
-<input type="submit" value="Calculate"></input><br/>
+<input type="button" value="Calculate" onclick="calculatePower()"><br/>
 </div>
 <div class="formelt">
-Area : <input type="text" name="area" value="{{area}}"></input>m<sup>2</sup><br/>
+POWER: <input type="text" id="power" name="POWER" readonly>(in WATTS)<br/>
 </div>
 </form>
 </div>
@@ -102,49 +96,45 @@ Area : <input type="text" name="area" value="{{area}}"></input>m<sup>2</sup><br/
 </body>
 </html>
 
-
-view.py
-
+urls.py
+from django.contrib import admin
+from django.urls import path
+from powerapp import views
+urlpatterns=[
+    path('admin/',admin.site.urls),
+    path('POWER/',views.power, name="POWER"),
+    path('',views.power,name="POWERROOT")
+]
+views.py
 from django.shortcuts import render
-def surfacearea(request):
-    context={}
-    context['area'] = "0"
-    context['r'] = "0"
-    context['h'] = "0"
+def power(request):
+    context=()
+    context['POWER'] = "0"
+    context['I'] = "0"
+    context['R'] = "e"
     if request.method == 'POST':
         print("POST method is used")
-        r = request.POST.get('radius','0')
-        h = request.POST.get('height','0')
-        print('request=',request)
-        print('radius=',r)
-        print('height=',h)
-        area = 2 * 3.14 * int(r) * int(h) + 2 * 3.14 * int(r) * int(r)
-        context['area'] = area
-        context['r'] = r
-        context['h'] = h
-        print('Area=',area)
-    return render(request,'mathapp/math.html',context) 
+        I=request.POST.get('instensity', '0')
+        R=request.POST.get('resistance', 'e')
+        print('request', request)
+        print('INTENSITY=', I)
+        print('RESISTANCE=',R)
+        POWER= int(I)**2*int(R)
+        context['[POWER]'] = POWER
+        context['I']=I
+        context['R']=R
+        print('POWER', POWER)
+    return render (request, 'powerapp/power.html',context)
 
-    urls.py
-
-    from django.contrib import admin
-from django.urls import path
-from mathapp import views
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('surfaceareaofcylinder/',views.surfacearea,name="surfaceareaofcylinder"),
-    path('',views.surfacearea,name="surfaceareaofcylinderroot")
-]
 ```
 
-
 ## SERVER SIDE PROCESSING:
-![Screenshot 2025-04-26 143635](https://github.com/user-attachments/assets/133dd593-7110-4d56-8766-84eb07144275)
+![Screenshot 2024-12-13 222510](https://github.com/user-attachments/assets/b37e906e-c4de-4fd6-a83c-3e2004373101)
+
 
 
 ## HOMEPAGE:
-![Screenshot 2025-04-26 143328](https://github.com/user-attachments/assets/c980705c-0bdc-4fb5-b8da-cdee27f11c40)
-
+![Screenshot 2024-12-15 205256](https://github.com/user-attachments/assets/961ebe70-28ce-41e9-8cc9-a7349e4120cb)
 
 ## RESULT:
-The program for performing server side processing is completed successfully.
+The program for performing server side processing is completed successfully.
